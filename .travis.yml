@@ -12,4 +12,8 @@ install:
   - composer install
 
 script:
-  - vendor/bin/phpunit --coverage-text
+  - mkdir -pv build/logs
+  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+  - vendor/bin/coveralls
