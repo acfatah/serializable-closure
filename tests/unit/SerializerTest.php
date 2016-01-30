@@ -21,7 +21,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
             $closure
         );
 
-        $unserialized = unserialize($serialized);
+        $unserialized = \Acfatah\SerializableClosure\Serializer::unserialize($serialized);
 
         $this->assertNotFalse($unserialized);
         $this->assertTrue(is_callable($unserialized));
