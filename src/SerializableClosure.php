@@ -76,7 +76,7 @@ final class SerializableClosure implements SerializableInterface
             $file->next();
         }
         $start = strpos($code, 'function');
-        $code = substr($code, $start, strpos($code, '}') - $start + 1);
+        $code = substr($code, $start, strrpos($code, '}') - $start + 1);
 
         // prepare variables
         $variables = [];
