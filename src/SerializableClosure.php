@@ -76,7 +76,7 @@ final class SerializableClosure implements SerializableInterface
             $file->next();
         }
         $start = strpos($code, 'function');
-        $code = substr($code, $start, strpos($code, '}') - $start + 1);
+        $code = substr($code, $start, strrpos($code, '}') - $start + 1);
 
         // prepare variables
         $variables = [];
@@ -93,6 +93,9 @@ final class SerializableClosure implements SerializableInterface
                 $variable = trim($variable, '$&');
                 $variables[$variable] = $static_variables[$variable];
             }
+        } else {
+            // convert to anonymous function
+            $code = preg_replace('/^(function)\s+(\w+)\s*(\()/', '$1$3', $code, 1);
         }
 
         return serialize(['code' => $code, 'variables' => $variables]);
